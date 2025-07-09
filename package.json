@@ -1,0 +1,15 @@
+{
+  "name": "fase-valoracion",
+  "version": "1.0.0",
+  "description": "Part Plus - Vehicle Service Management API",
+  "main": "backend/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "cd backend && npm install",
+    "start": "cd backend && npm start",
+    "dev": "cd backend && npm run dev"
+  },
+  "keywords": ["part-plus", "vehicle-service", "api"],
+  "author": "",
+  "license": "ISC"
+}

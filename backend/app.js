@@ -13,7 +13,9 @@ const app = express();
 // Configuración de CORS
 app.use(
   cors({
-    origin: "http://localhost:5173", // Ajustar según frontend
+    origin: process.env.NODE_ENV === 'production' 
+      ? ["https://tu-frontend.vercel.app", "https://tu-frontend.netlify.app"] // Agregar URLs de producción
+      : "http://localhost:5173", // Para desarrollo
     credentials: true,
   })
 );
