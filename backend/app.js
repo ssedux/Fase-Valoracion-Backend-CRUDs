@@ -3,6 +3,12 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import swaggerUI from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
+import path from "path";
+import { fileURLToPath } from "url";
+
+// Para obtener __dirname en ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Importar rutas
 import clientsRoutes from "./src/routes/clients.js";
@@ -35,12 +41,16 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "http://localhost:4000",
-        description: "Servidor de desarrollo",
+        url: process.env.NODE_ENV === 'production' 
+          ? process.env.RENDER_EXTERNAL_URL || "https://tu-servicio.onrender.com"
+          : "http://localhost:4000",
+        description: process.env.NODE_ENV === 'production' 
+          ? "Servidor de producción"
+          : "Servidor de desarrollo",
       },
     ],
   },
-  apis: ["./src/routes/*.js"], // Rutas donde están las documentaciones
+  apis: [path.join(__dirname, "src", "routes", "*.js")], // Ruta absoluta a los archivos de rutas
 };
 
 const specs = swaggerJSDoc(swaggerOptions);
